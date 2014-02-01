@@ -1,38 +1,31 @@
-#!/usr/bin/python
+#!/usr/local/bin/python
 
 import sys
+from collections import Counter
 
-currentStudent = None
-hours = {}
+current_student = None
+hours = []
 
-
-#TODO: verificar que los resultados son correctos
-#TODO: ver si hay que filtrar por el tipo de node (p.ej, ¿cuentan los comentarios?)
-
-def getMostFrequentHour(d):
-	return sorted(d, key=d.get, reverse=True)[0]
+def get_most_frequent_hour(h):
+	#return the top 1 most common hour
+	#if there are hours with equal count, an arbitray one is returned
+	return Counter(h).most_common(1)[0][0]
 
 for line in sys.stdin:
 	data_mapped = line.strip().split("\t")
 	if (len(data_mapped) != 2):
 		continue
 
-	thisStudent, thisHour = data_mapped
+	this_student, this_hour = data_mapped
 
-	if currentStudent and currentStudent != thisStudent:
-		h = getMostFrequentHour(hours)
-		#print("{0}\t{1}".format(currentStudent, h))
-		print("{0}\t{1}".format(currentStudent, hours))
-		hours = {}
+	if current_student and current_student != this_student:
+		h = get_most_frequent_hour(hours)
+		print("{0}\t{1}".format(current_student, h))
+		hours = []
 	
-	currentStudent = thisStudent
-	if thisHour in hours:
-		hours[thisHour] += 1
-	else:
-		hours[thisHour] = 1
-
-
-if currentStudent != None:
-	h = getMostFrequentHour(hours)
-	#print("{0}\t{1}".format(currentStudent, h))
-	print("{0}\t{1}".format(currentStudent, hours))
+	current_student = this_student
+	hours.append(this_hour)
+	
+if current_student:
+	h = get_most_frequent_hour(hours)
+	print("{0}\t{1}".format(current_student, h))
