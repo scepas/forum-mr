@@ -6,6 +6,10 @@ import csv
 reader = csv.reader(sys.stdin, delimiter='\t', quotechar='"', quoting=csv.QUOTE_ALL, lineterminator='\n\r')
 
 for line in reader:
+    #if it's the header, we skip it
+    if line[0] == "id":
+        continue
+
     #if node_type is question
     node_type = line[5]
     is_question = 0

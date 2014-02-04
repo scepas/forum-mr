@@ -10,10 +10,13 @@ from datetime import datetime
 #"state_string" "last_edited_id"    "last_activity_by_id"   "last_activity_at"  "active_revision_id"    "extra" 
 #"extra_ref_id" "extra_count"   "marked"
 
-
 reader = csv.reader(sys.stdin, delimiter='\t', quotechar='"', quoting=csv.QUOTE_ALL, lineterminator='\n\r')
 
 for line in reader:
+    #if it's the header, we skip it
+    if line[0] == "id":
+        continue
+
     #make sure none of the expected fields is missing
     if (len(line) != 19):
         continue
