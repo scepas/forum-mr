@@ -6,7 +6,7 @@ current_id = None
 answers_length = []
 question_length = 0
 
-#input: id\t\isquestion\length
+#input: id\t\isquestion\tlength
 
 def get_average(l):
     if len(l) == 0:
