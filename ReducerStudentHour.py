@@ -7,7 +7,7 @@ current_student = None
 hours = []
 
 #return the top 1 most common hour
-#if there are hours with equal count, an arbitray one is returned
+#if there are hours with equal count, an arbitrary one is returned
 def get_most_frequent_hour(h):
     return Counter(h).most_common(1)[0][0]
 
