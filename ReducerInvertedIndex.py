@@ -4,7 +4,7 @@ import sys
 
 current_line = None
 current_word = None
-nodes = []
+nodes = set()
 
 
 for line in sys.stdin:
@@ -19,13 +19,13 @@ for line in sys.stdin:
 	this_word, this_node_id = data_mapped
 
 	if current_word and current_word != this_word:
-		print("{0}\t{1}".format(current_word, sorted(set(nodes))))
+		print("{0}\t{1}".format(current_word, sorted(nodes)))
 		current_word = this_word;
-		nodes = []
+		nodes = set()
 
 	current_line = data_mapped
 	current_word = this_word
-	nodes.append(int(this_node_id))
+	nodes.add(int(this_node_id))
 
 if current_word:
-	print("{0}\t{1}".format(current_word, sorted(set(nodes))))
+	print("{0}\t{1}".format(current_word, sorted(nodes)))
