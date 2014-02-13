@@ -7,9 +7,14 @@ current_student = None
 hours = []
 
 #return the top 1 most common hour
-#if there are hours with equal count, an arbitrary one is returned
+#if there are ties, all hours with the same count are returned 
 def get_most_frequent_hour(h):
-    return Counter(h).most_common(1)[0][0]
+    c = Counter(h)
+    #number of times the most common hour appears
+    top = c.most_common(1)[0][1]
+    #return all hours appearing top number of times
+    return [hour for hour, count in c.items() if count == top]
+    
 
 for line in sys.stdin:
     data_mapped = line.strip().split("\t")
